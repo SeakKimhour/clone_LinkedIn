@@ -1,10 +1,14 @@
 import 'package:clone_linkin/sub-page/homepage/settting.dart';
+import 'package:clone_linkin/sub-page/jobs/job.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
 
+import '../sub-page/MyNetwork/mynetwork.dart';
 import '../sub-page/homepage/home_page.dart';
+import '../sub-page/notification/notification.dart';
+import '../sub-page/post/post.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -25,9 +29,24 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  PageController _pageController = new PageController();
   Widget _buildBody() {
-    return ListView(
-      children: [_buildItem()],
+    return Container(
+      child: PageView(
+        onPageChanged: (index) {
+          setState(() {
+            _index = index;
+          });
+        },
+        controller: _pageController,
+        children: [
+          HomePage(),
+          MyNetwrk(),
+          PostPage(),
+          NotificationPage(),
+          JobPage()
+        ],
+      ),
     );
   }
 
@@ -67,105 +86,77 @@ class _MainPageState extends State<MainPage> {
       unselectedLabelStyle: TextStyle(color: Colors.white),
       currentIndex: _index,
       type: BottomNavigationBarType.fixed,
+      onTap: (index) {
+        setState(() {
+          _index = index;
+        });
+        _pageController.jumpToPage(_index);
+      },
       items: [
         BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: (() {
-                  setState(() {
-                    _index = 0;
-                  });
-                }),
-                child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    width: MediaQuery.of(context).size.width / 5,
-                    decoration: BoxDecoration(
-                        border: Border(
-                            top: BorderSide(
-                                color:
-                                    _index == 0 ? Colors.black : Colors.white,
-                                width: 1))),
-                    child: Icon(Icons.home, size: 20))),
+            icon: Container(
+                padding: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width / 5,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                            color: _index == 0 ? Colors.black : Colors.white,
+                            width: 1))),
+                child: Icon(Icons.home, size: 20)),
             label: "Home"),
         BottomNavigationBarItem(
-            icon: InkWell(
-              onTap: (() {
-                setState(() {
-                  _index = 1;
-                });
-              }),
-              child: Container(
-                  padding: EdgeInsets.only(top: 10),
-                  width: MediaQuery.of(context).size.width / 5,
-                  decoration: BoxDecoration(
-                      border: Border(
-                          top: BorderSide(
-                              color: _index == 1 ? Colors.black : Colors.white,
-                              width: 1))),
-                  child: Icon(FontAwesome5.user_friends, size: 20)),
+            icon: Container(
+              padding: EdgeInsets.only(top: 10),
+              width: MediaQuery.of(context).size.width / 5,
+              decoration: BoxDecoration(
+                  border: Border(
+                      top: BorderSide(
+                          color: _index == 1 ? Colors.black : Colors.white,
+                          width: 1))),
+              child: Icon(FontAwesome5.user_friends, size: 20),
             ),
             label: "My Network"),
         BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: (() {
-                  setState(() {
-                    _index = 2;
-                  });
-                }),
-                child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    width: MediaQuery.of(context).size.width / 5,
-                    decoration: BoxDecoration(
-                        border: Border(
-                            top: BorderSide(
-                                color:
-                                    _index == 2 ? Colors.black : Colors.white,
-                                width: 1))),
-                    child: Icon(
-                      CupertinoIcons.plus_square_fill,
-                      size: 20,
-                    ))),
+            icon: Container(
+                padding: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width / 5,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                            color: _index == 2 ? Colors.black : Colors.white,
+                            width: 1))),
+                child: Icon(
+                  CupertinoIcons.plus_square_fill,
+                  size: 20,
+                )),
             label: "Post"),
         BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: (() {
-                  setState(() {
-                    _index = 3;
-                  });
-                }),
-                child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    width: MediaQuery.of(context).size.width / 5,
-                    decoration: BoxDecoration(
-                        border: Border(
-                            top: BorderSide(
-                                color:
-                                    _index == 3 ? Colors.black : Colors.white,
-                                width: 1))),
-                    child: Icon(
-                      CupertinoIcons.bell_fill,
-                      size: 20,
-                    ))),
+            icon: Container(
+                padding: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width / 5,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                            color: _index == 3 ? Colors.black : Colors.white,
+                            width: 1))),
+                child: Icon(
+                  CupertinoIcons.bell_fill,
+                  size: 20,
+                )),
             label: "Notifications"),
         BottomNavigationBarItem(
-            icon: InkWell(
-                onTap: (() {
-                  setState(() {
-                    _index = 4;
-                  });
-                }),
-                child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    width: MediaQuery.of(context).size.width / 5,
-                    decoration: BoxDecoration(
-                        border: Border(
-                            top: BorderSide(
-                                color:
-                                    _index == 4 ? Colors.black : Colors.white,
-                                width: 1))),
-                    child: Icon(
-                      FontAwesome5.briefcase,
-                      size: 20,
-                    ))),
+            icon: Container(
+                padding: EdgeInsets.only(top: 10),
+                width: MediaQuery.of(context).size.width / 5,
+                decoration: BoxDecoration(
+                    border: Border(
+                        top: BorderSide(
+                            color: _index == 4 ? Colors.black : Colors.white,
+                            width: 1))),
+                child: Icon(
+                  FontAwesome5.briefcase,
+                  size: 20,
+                )),
             label: "Jobs")
       ],
     );
