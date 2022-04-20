@@ -39,6 +39,7 @@ class _MainPageState extends State<MainPage> {
           });
         },
         controller: _pageController,
+        physics: NeverScrollableScrollPhysics(),
         children: [
           HomePage(),
           MyNetwrk(),
