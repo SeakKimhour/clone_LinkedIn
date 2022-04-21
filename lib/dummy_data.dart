@@ -1,9 +1,10 @@
+import 'models/detailPost.dart';
 import 'models/notification.dart';
 
 const notification = [
   Notification(
     imgUrl:
-        "https://media.istockphoto.com/photos/confident-african-american-female-executive-isolated-picture-id171247834?k=6&m=171247834&s=170667a&w=0&h=ORMTSOskhAzJ8Ce5iadGUYR_5wlvJ5LAY3MQnPcAvzM=",
+        "https://media-exp1.licdn.com/dms/image/C4D03AQFJl3E25jpsDw/profile-displayphoto-shrink_800_800/0/1647007339605?e=1655942400&v=beta&t=z5YfQF-lGIatMqzDqYBZUFvORWqiJtGP1dqfIqac1k4",
     post:
         "ចាប់ផ្តើមឳកាសការងារជាមួយវីងឥឡូវនេះ! វីងកំពុងស្វែងរកបុគ្គលិកហាត់ការផ្នែក Data Entry Intern សម្រាប់ទីតាំងការិយាល័យកណ្តាលជិតស្តុបបូកគោ",
     reactions: 20,
@@ -96,5 +97,23 @@ const notification = [
     comments: 10,
     hours: 7,
     seen: true,
+  ),
+];
+
+const postDetail = [
+  DetailPostPage(
+    userName: "Kimhour Seak",
+    job: "Senior HR and Admin Executive at YouAdMe",
+    userImgUrl:
+        "https://media-exp1.licdn.com/dms/image/C4D03AQFJl3E25jpsDw/profile-displayphoto-shrink_800_800/0/1647007339605?e=1655942400&v=beta&t=z5YfQF-lGIatMqzDqYBZUFvORWqiJtGP1dqfIqac1k4",
+    date: 1,
+    decription: [
+      "Which corner is more common for the menu icon?",
+      "Share your Opinion 👇",
+    ],
+    postImageUrl:
+        "https://media-exp1.licdn.com/dms/image/C5622AQH1PzD9-jVlEQ/feedshare-shrink_1280/0/1650335007573?e=2147483647&v=beta&t=I6tMAo_QQLppZB6gfbQ68_ADmwtc8izDqA4jGOFHP1s",
+    likeAmount: 200,
+    shareAmount: 100,
   ),
 ];
