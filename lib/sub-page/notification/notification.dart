@@ -1,4 +1,5 @@
 import 'package:clone_linkin/dummy_data.dart';
+import 'package:clone_linkin/sub-page/notification/screens/details_post.dart';
 import 'package:flutter/material.dart';
 
 class NotificationPage extends StatelessWidget {
@@ -16,7 +17,14 @@ class NotificationPage extends StatelessWidget {
                     top: 10,
                   ),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DetailPostPage(),
+                        ),
+                      );
+                    },
                     child: Column(
                       children: [
                         Row(
