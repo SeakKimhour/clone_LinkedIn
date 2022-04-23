@@ -30,12 +30,16 @@ dependencies:
   flutter:
     sdk: flutter
   hexcolor: ^2.0.6
+  font_awesome_flutter: ^10.1.0
+  provider: ^6.0.2
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   fluttericon: ^2.0.0
+  floating_pullup_card: ^1.1.0
+  expandable:
  
 
 dev_dependencies:
@@ -63,6 +67,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

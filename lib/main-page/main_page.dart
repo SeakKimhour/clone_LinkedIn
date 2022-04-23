@@ -1,14 +1,21 @@
+import 'package:clone_linkin/models/chat.dart';
+import 'package:clone_linkin/models/notification.dart';
 import 'package:clone_linkin/sub-page/homepage/settting.dart';
 import 'package:clone_linkin/sub-page/jobs/job.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:fluttericon/font_awesome5_icons.dart';
+import 'package:provider/provider.dart';
 
+import '../Data/dummy_data.dart';
+import '../Provider/notification.dart';
 import '../sub-page/MyNetwork/mynetwork.dart';
 import '../sub-page/homepage/home_page.dart';
 import '../sub-page/notification/notification.dart';
 import '../sub-page/post/post.dart';
+import 'Screen/messager.dart';
+import 'Screen/search.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -19,6 +26,7 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,6 +86,13 @@ class _MainPageState extends State<MainPage> {
   }
 
   Widget _buildBottomAppBar() {
+    Iterable<int> numOfNoti = context.watch<NotiCounter>().Num;
+    int num = 0;
+    numOfNoti.forEach((element) {
+      if (element == 1) {
+        num++;
+      }
+    });
     return BottomNavigationBar(
       selectedFontSize: 10,
       unselectedFontSize: 8,
@@ -132,18 +147,49 @@ class _MainPageState extends State<MainPage> {
                 )),
             label: "Post"),
         BottomNavigationBarItem(
-            icon: Container(
-                padding: EdgeInsets.only(top: 10),
-                width: MediaQuery.of(context).size.width / 5,
-                decoration: BoxDecoration(
-                    border: Border(
-                        top: BorderSide(
-                            color: _index == 3 ? Colors.black : Colors.white,
-                            width: 1))),
-                child: Icon(
-                  CupertinoIcons.bell_fill,
-                  size: 20,
-                )),
+            icon: Stack(
+              children: [
+                Container(
+                  padding: EdgeInsets.only(top: 10),
+                  width: MediaQuery.of(context).size.width / 5,
+                  decoration: BoxDecoration(
+                      border: Border(
+                          top: BorderSide(
+                              color: _index == 3 ? Colors.black : Colors.white,
+                              width: 1))),
+                  child: Icon(
+                    CupertinoIcons.bell_fill,
+                    size: 20,
+                  ),
+                ),
+                Positioned(
+                  bottom: 2,
+                  right: 15,
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: CircleAvatar(
+                      radius: 7,
+                      backgroundColor: Color.fromARGB(255, 238, 39, 25),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  bottom: 2,
+                  right: 19,
+                  child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "${num}",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 10,
+                        ),
+                      )),
+                ),
+
+                // Positioned(child:Text() )
+              ],
+            ),
             label: "Notifications"),
         BottomNavigationBarItem(
             icon: Container(
@@ -177,8 +223,6 @@ class _MainPageState extends State<MainPage> {
                 child: CircleAvatar(
                   radius: 90,
                   backgroundImage: AssetImage('assets/profile.png'),
-                  // backgroundImage: NetworkImage(
-                  //     'https://tinypng.com/images/social/website.jpg'),
                 ),
               ),
             ),
@@ -187,7 +231,12 @@ class _MainPageState extends State<MainPage> {
       ),
       backgroundColor: Colors.white,
       title: InkWell(
-        onTap: (() {}),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => SearchPage()),
+          );
+        },
         child: Container(
           padding: EdgeInsets.all(5),
           color: HexColor("#39434f"),
@@ -208,7 +257,12 @@ class _MainPageState extends State<MainPage> {
       ),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MessagePage()),
+              );
+            },
             icon: Icon(
               CupertinoIcons.ellipses_bubble_fill,
               color: HexColor("#39434f"),
@@ -230,7 +284,7 @@ class _MainPageState extends State<MainPage> {
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const HomePage()),
+                    MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 },
                 child: Container(
